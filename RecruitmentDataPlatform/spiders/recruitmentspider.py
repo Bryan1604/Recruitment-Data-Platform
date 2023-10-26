@@ -1,5 +1,5 @@
 import scrapy
-
+from RecruitmentDataPlatform.items import RecruitmentItem
 
 class RecruitmentspiderSpider(scrapy.Spider):
     name = "recruitmentspider"
@@ -10,15 +10,16 @@ class RecruitmentspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         jobs = response.css('div.ipy-2')
+        recruitment_item = RecruitmentItem()
         for job in jobs:
-            yield {
-                "job_name": job.css('h3.imt-3 a::text').get(),
-                "job_url": "https://itviec.com" + job.css('h3.imt-3 a').attrib['href'],
-                "type": job.css('div.d-flex.align-items-center.text-dark-grey.imt-1 span::text')[0].get(),
-                "location": job.css('div.d-flex.align-items-center.text-dark-grey.imt-1 span::text')[1].get(),
-                "company": job.css('div.imy-3.d-flex.align-items-center span.ims-2.small-text a.text-rich-grey::text').get(),
-                "tag": job.css('div.imt-3.imb-2 a.text-reset div.itag.itag-light.itag-sm::text').get()
-            }
+            recruitment_item['job_name'] = job.css('h3.imt-3 a::text').get(),
+            recruitment_item['job_url'] =  "https://itviec.com" + job.css('h3.imt-3 a').attrib['href'],
+            recruitment_item['type'] = job.css('div.d-flex.align-items-center.text-dark-grey.imt-1 span::text')[0].get().strip(),
+            recruitment_item['location'] = job.css('div.d-flex.align-items-center.text-dark-grey.imt-1 span::text')[1].get().strip(),
+            recruitment_item['company'] = job.css('div.imy-3.d-flex.align-items-center span.ims-2.small-text a.text-rich-grey::text').get().strip(),
+            recruitment_item['tag'] = job.css('div.imt-3.imb-2 a.text-reset div.itag.itag-light.itag-sm::text').get().strip(),
+            recruitment_item['post_time'] = job.css('div.d-flex.align-items-center.justify-content-between.position-relative span.small-text.text-dark-grey::text').get().strip(),
+            yield recruitment_item
         
         next_page =  response.css("div.page.next a::attr(href)").get()
         if next_page is not None:
