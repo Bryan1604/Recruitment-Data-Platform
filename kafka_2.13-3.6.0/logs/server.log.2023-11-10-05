@@ -1,0 +1,2 @@
+[2023-11-10 05:35:47,829] INFO Expiring session 0x1000bdbdf590001, timeout of 18000ms exceeded (org.apache.zookeeper.server.ZooKeeperServer)
+[2023-11-10 05:35:50,074] INFO Invalid session 0x1000bdbdf590001 for client /[0:0:0:0:0:0:0:1]:50520, probably expired (org.apache.zookeeper.server.ZooKeeperServer)

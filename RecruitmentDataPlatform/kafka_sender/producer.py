@@ -17,7 +17,7 @@ faker = Faker()
     # return data
     
 input_jsonl_file = 'companyList.jsonl'  
-output_json_file = 'companyList.json' 
+output_json_file = 'companyList.json'
 
 #tranfer jsonl file to json file
 with open(input_jsonl_file, 'r', encoding='utf-8') as jsonl_file, open(output_json_file, 'w', encoding='utf-8') as json_file:
@@ -33,11 +33,11 @@ with open(input_jsonl_file, 'r', encoding='utf-8') as jsonl_file, open(output_js
     json.dump(json_data, json_file, indent=4)
     
 
-# def get_file() :
-#     filepath = "companyList.json"
-#     f = open(filepath) 
-#     data = json.load(f)
-#     return data
+def get_file() :
+    filepath = "companyList.json"
+    f = open(filepath) 
+    data = json.load(f)
+    return data
 
 def get_partitioner(key_bytes, all_partitions, available_partitions):
     return 0
@@ -52,8 +52,9 @@ producer = KafkaProducer(
 
 while 1==1:
     data = get_file()
-    print(data)
-    producer.send(
-        'company_topic',data
-    )
-    time.sleep(3)
+    for element in data:
+        print(element)
+        producer.send(
+            'job_topic',element
+        )
+        time.sleep(3)

@@ -1,0 +1,1 @@
+[2023-11-08 22:29:49,453] INFO Invalid session 0x10009b38b680000 for client /[0:0:0:0:0:0:0:1]:56340, probably expired (org.apache.zookeeper.server.ZooKeeperServer)
