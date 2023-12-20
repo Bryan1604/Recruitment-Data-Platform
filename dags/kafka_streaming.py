@@ -60,8 +60,8 @@ def stream_data():
 
 with DAG('user_automation',
          default_args=default_args,
-         schedule_interval='@daily',
-        #  schedule_interval=timedelta(minutes=2),
+        #  schedule_interval='@daily',
+         schedule_interval=timedelta(minutes=1),
          catchup=False) as dag:
 
     streaming_task = PythonOperator(
