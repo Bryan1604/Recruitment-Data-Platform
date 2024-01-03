@@ -203,17 +203,17 @@ services:
   #   networks:
   #     - confluent
 
-  mongo_db:
-    image: mongo:latest
-    container_name: mongodb
-    hostname: mongodb
-    ports:
-      - "27017:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
-    networks:
-      - confluent
+  # mongo_db:
+  #   image: mongo:latest
+  #   container_name: mongodb
+  #   hostname: mongodb
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=admin
+  #   networks:
+  #     - confluent
 
 networks:
   confluent:
